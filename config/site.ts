@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next Admin",
+  name: "Next Template",
   description:
-    "A next admin template.",
+    "A next template.",
   url: "/",
-  links: { github: "https://github.com/wujianguo/next-admin-template", docs: "/docs" },
+  links: { github: "https://github.com/wujianguo/next-template", docs: "/docs" },
 }

@@ -1,7 +1,7 @@
 "use client"
 
-// import { FormError } from "@/components/form-error";
-// import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/form/form-error";
+import { FormSuccess } from "@/components/form/form-success";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -17,8 +17,8 @@ import { request } from "@/lib/request";
 // import { SmartFormDialog } from "@/components/form/form-dialog";
 
 export function CreateAppForm() {
-  // const [error, setError] = useState<string | undefined>("");
-  // const [success, setSuccess] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const router = useRouter();
@@ -32,19 +32,21 @@ export function CreateAppForm() {
   });
 
   const onSubmit = (values: z.infer<typeof TeamCreateSchema>) => {
-    // setError("");
-    // setSuccess("");
+    setError("");
+    setSuccess("");
     setIsPending(true);
 
     // startTransition(() => {
       request("/api/apps", TeamSchema, { method: "POST", body: JSON.stringify(values) }).then((response) => {
         setIsPending(false);
         form.reset();
+        setError("");
+        setSuccess("");
         router.push(`/apps/${response.slug}`);
       }).catch((error) => {
         setIsPending(false);
         console.error(error);
-        // setError(error.message);
+        setError(error.message);
       });
     // });
   };
@@ -103,8 +105,8 @@ export function CreateAppForm() {
                   />
                 </>
               </div>
-              {/* <FormError message={error} /> */}
-              {/* <FormSuccess message={success} /> */}
+              <FormError message={error} />
+              <FormSuccess message={success} />
               <Button
                 disabled={isPending}
                 loading={isPending}
