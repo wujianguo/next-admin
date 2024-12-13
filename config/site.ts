@@ -2,6 +2,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Next Template",
+  slogan: "A next template.",
   description:
     "A next template.",
   url: "/",
